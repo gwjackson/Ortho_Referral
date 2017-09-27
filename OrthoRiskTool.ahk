@@ -19,16 +19,16 @@ Gui, Add, Radio, x366 y55 w40 h30 voBMI goBMI, Y
 Gui, Add, Radio, x416 y55 w40 h30 goBMI, N
 
 Gui, Add, Text, x16 y102 w340 h30 , Is the A1c >= 7.5`%  (increased post-op risk)
-Gui, Add, Radio, x366 y95 w40 h30 goA1c, Y
+Gui, Add, Radio, x366 y95 w40 h30 voA1c goA1c, Y
 Gui, Add, Radio, x416 y95 w40 h30 goA1c, N
 
 Gui, Add, Text, x16 y142 w340 h30 , If a smoker`, has the patient quite or not smoked for at least the past 6 weeks?
-Gui, Add, Radio, x366 y135 w40 h30 , Y
-Gui, Add, Radio, x416 y135 w40 h30 , N
+Gui, Add, Radio, x366 y135 w40 h30 voSmoke goSmoke, Y
+Gui, Add, Radio, x416 y135 w40 h30 goSmoke, N
 
 Gui, Add, Text, x16 y182 w340 h100 , Is the patient on anticoagulation for a medical indication?
-Gui, Add, Radio, x366 y175 w40 h30 , Y
-Gui, Add, Radio, x416 y175 w40 h30 , N
+Gui, Add, Radio, x366 y175 w40 h30 voAnticoag goAnticoag, Y
+Gui, Add, Radio, x416 y175 w40 h30 goAnticoag, N
 Gui, Add, Text, x30 y210, a. Warfarin or Coumadin with plan for bridging
 Gui, Add, Radio, x366 y200 w40 h30 , Y
 Gui, Add, Radio, x416 y200 w40 h30 , N
@@ -80,7 +80,7 @@ Gui, Add, Groupbox, x235 y640 w225 h65, Risk Interpretation
 Gui, Add, Text, x246 y655 w210 h45 , * < 6 Post acute care facility (SNF or Rehab)`n* 6-9 Home health PT/OT`n* >9 Home with outpatient PT/OT
 
 ; Generated using SmartGUI Creator for SciTE
-Gui, Show, w480 h727, Orthopedic Referral Checklist - Total Joint Replacement Pre-Op eval
+Gui, Show, w480 h727, Orthopedic Referral - Total Joint Replacement Pre-Op eval
 return
 
 ; TODO  - not the actual scoring code and the report to clipboard
@@ -88,18 +88,39 @@ return
 oPT:
 Gui, Submit, NOHIDE
 YNoPT := (oPT = 1) ?  "has" :  "has not"
-MsgBox, % "The patient " . YNoPT . " failed conservative measures."
+YNoPTStr := "The patient " . YNoPT . " failed conservative measures.`n`r"
+MsgBox , % YNoPTStr
 return 
 
 oBMI:
 Gui, Submit, NOHIDE
 YNoBMI := oBMI = 1 ? "is" : "is not"
-MsgBox, % "The patient's BMI " . YNoBMI . " >= 40 or >=35 with comorbidities."
+YNoBMIStr := "The patient's BMI " . YNoBMI . " >= 40 or >=35 with comorbidities.`n`r" 
+MsgBox, % YNoBMIStr
 return 
 
 oA1c:
 Gui, Submit, NOHIDE
+oA1c := (oA1c = 1) ? "is" : "is not"
+oA1cStr := "The patient's A1c " . oA1c . " >= to 7.5`%`n`r"
+MsgBox, % oA1cStr
 return 
+
+oSmoke:
+Gui, Submit, NOHIDE
+oSmoke := (oSmoke = 1) ? "have" : "have not" 
+oSmokeStr := "If the patient was a smoker they " . oSmoke . " quite`; or they also " . oSmoke . " quite smoking in the past 6 weeks.`n`r"  
+MsgBox, % oSmokeStr
+return
+
+oAnticoag:
+Gui, Submit, NOHIDE
+oAnticoag := (oAnticoag = 2) ? "The patient is not on anticoagulationg therapy" : 1
+oAnticoagStr := oAnticoag
+MsgBox, % oAnticoagStr
+return
+
+
 
 GuiClose:
 ExitApp
