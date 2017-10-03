@@ -5,7 +5,7 @@
 
 ; set up variables
 oPT := 0, oBMI := 0, oA1c := 0, oSmoke := 0, oAnticoag := 0, oWarfarin := 0, oXeralto := 0
-oASA := 0, oCardiac :=0 
+oASA := 0, oCardiac :=0, oAnticoag := 2
 
 reportString := ""
 
@@ -28,16 +28,16 @@ Gui, Add, Radio, x416 y135 w40 h30 goSmoke, N
 
 Gui, Add, Text, x16 y182 w340 h100 , Is the patient on anticoagulation for a medical indication?
 Gui, Add, Radio, x366 y175 w40 h30 voAnticoag goAnticoag, Y
-Gui, Add, Radio, x416 y175 w40 h30 goAnticoag, N
+Gui, Add, Radio, x416 y175 w40 h30 goAnticoag Checked, N
 Gui, Add, Text, x30 y210, a. Warfarin or Coumadin with plan for bridging
-Gui, Add, Radio, x366 y200 w40 h30 , Y
-Gui, Add, Radio, x416 y200 w40 h30 , N
+Gui, Add, Radio, x366 y200 w40 h30 voCoumadin goCoumadin, Y
+Gui, Add, Radio, x416 y200 w40 h30 goCoumadin, N
 Gui, Add, Text, x30 y235, b.  Xeralto / Eliquis 
-Gui, Add, Radio, x366 y225 w40 h30 , Y
-Gui, Add, Radio, x416 y225 w40 h30 , N
+Gui, Add, Radio, x366 y225 w40 h30 voXeralto goXeralto , Y
+Gui, Add, Radio, x416 y225 w40 h30 goXeralto, N
 Gui, Add, Text, x20 y260, c.  Aspirin / Plavix 
-Gui, Add, Radio, x366 y250 w40 h30 , Y
-Gui, Add, Radio, x416 y250 w40 h30 , N
+Gui, Add, Radio, x366 y250 w40 h30 voAspirin goAspirin , Y
+Gui, Add, Radio, x416 y250 w40 h30 goAspirin, N
 
 Gui, Add, Text, x16 y292 w340 h30 , Is the patient stable for surgery from a cardiac standpoint?
 Gui, Add, Radio, x366 y285 w40 h30 , Y
@@ -120,6 +120,38 @@ oAnticoagStr := oAnticoag
 MsgBox, % oAnticoagStr
 return
 
+oCoumadin:
+Gui, Submit, NOHIDE
+if (oAnticoag = 2) {
+	return
+}
+if (oCoumadin = 1) {
+	oCoumadinStr := "The patient is on anticoag. treatment with Coumadin / Warfarin"
+	MsgBox, % oCoumadinStr
+}
+return 
+
+oXeralto:
+Gui, Submit, NOHIDE
+if (oAnticoag = 2) {
+	return
+}
+if (oXeralto = 1) {
+	oXeraltoStr := "The patient is on anticoag. treatment with Xeralto / Eliquis"
+	MsgBox, % oXeraltoStr
+}
+return
+
+oAspirin:
+Gui, Submit, NOHIDE
+if (oAnticoag = 2) {
+	return
+}
+if (oAspirin = 1) {
+	oAspirinStr := "The patient is on anticoag. treatment with Aspirin / Plavix"
+	MsgBox, % oAspirinStr
+}
+return
 
 
 GuiClose:
