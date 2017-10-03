@@ -5,7 +5,7 @@
 
 ; set up variables
 oPT := 0, oBMI := 0, oA1c := 0, oSmoke := 0, oAnticoag := 0, oWarfarin := 0, oXeralto := 0
-oASA := 0, oCardiac :=0
+oASA := 0, oCardiac :=0 
 
 reportString := ""
 
