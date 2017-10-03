@@ -5,7 +5,7 @@
 
 ; set up variables
 oPT := 0, oBMI := 0, oA1c := 0, oSmoke := 0, oAnticoag := 0, oWarfarin := 0, oXeralto := 0
-oASA := 0, oCardiac :=0, oAnticoag := 2
+oASA := 0, oCardiac :=0, oAnticoag := 0
 
 reportString := ""
 
@@ -35,43 +35,43 @@ Gui, Add, Radio, x416 y200 w40 h30 goCoumadin, N
 Gui, Add, Text, x30 y235, b.  Xeralto / Eliquis 
 Gui, Add, Radio, x366 y225 w40 h30 voXeralto goXeralto , Y
 Gui, Add, Radio, x416 y225 w40 h30 goXeralto, N
-Gui, Add, Text, x20 y260, c.  Aspirin / Plavix 
+Gui, Add, Text, x30 y260, c.  Aspirin / Plavix 
 Gui, Add, Radio, x366 y250 w40 h30 voAspirin goAspirin , Y
 Gui, Add, Radio, x416 y250 w40 h30 goAspirin, N
 
 Gui, Add, Text, x16 y292 w340 h30 , Is the patient stable for surgery from a cardiac standpoint?
-Gui, Add, Radio, x366 y285 w40 h30 , Y
-Gui, Add, Radio, x416 y285 w40 h30 , N
+Gui, Add, Radio, x366 y285 w40 h30 voCardiac goCardiac, Y
+Gui, Add, Radio, x416 y285 w40 h30 goCardiac, N
 
-; *****
+; ********************
 
-Gui, Add, GroupBox, x6 y330 w460 h395 , Risk Assessment and Prediction Tool`; Discharge Planning
+Gui, Add, GroupBox, x6 y330 w460 h380 , Risk Assessment and Prediction Tool`; Discharge Planning
 Gui, Add, Text, x16 y355 w150 h50 , What is their age group?
-Gui, Add, Radio, x176 y355 w90 h20 , 50-65 years (2)
-Gui, Add, Radio, x176 y380 w90 h20 , 66-75 years (1)
-Gui, Add, Radio, x276 y355 w90 h20 , > 75 years (0)
+Gui, Add, Radio, x276 y355 w90 h20 voAge goAge , > 75 years (0)
+Gui, Add, Radio, x176 y380 w90 h20 goAge , 66-75 years (1)
+Gui, Add, Radio, x176 y355 w90 h20 goAge , 50-65 years (2)
 
 Gui, Add, Text, x16 y410 w150 h50 , Gender?
-Gui, Add, Radio, x176 y410 w90 h20 , Male (2)
-Gui, Add, Radio, x176 y435 w90 h20 , Female (1)
+Gui, Add, Radio, x176 y435 w90 h20 voSex goSex , Female (1)
+Gui, Add, Radio, x176 y410 w90 h20 goSex, Male (2)
 
-Gui, Add, Text, x16 y470 w150 h50 , How far`, on avg.`, can they walk? (a blook is ~ 200m)
-Gui, Add, Radio, x176 y470 w170 h20 , 2 blocks or moer (2)
-Gui, Add, Radio, x176 y500 w170 h20 , 1-2 blocks (shopping center) (1)
-Gui, Add, Radio, x356 y470 w100 h50 , Housebound (most of the time) (0)
+Gui, Add, Text, x16 y470 w150 h50 , How far`, on avg.`, can they walk? (a block is ~ 200m)
+Gui, Add, Radio, x356 y470 w100 h50 voWalk goWalk , Housebound (most of the time) (0)
+Gui, Add, Radio, x176 y500 w170 h20 goWalk , 1-2 blocks (shopping center) (1)
+Gui, Add, Radio, x176 y470 w170 h20 goWalk, 2 blocks or more (2)
 
-Gui, Add, Text, x16 y530 w150 h50 , Which Gait aid do they use? (More oftent than not)
-Gui, Add, Radio, x176 y530 w90 h20 , None (2)
-Gui, Add, Radio, x176 y560 w130 h20 , Single point stick (1)
-Gui, Add, Radio, x356 y530 w90 h30 , Crutches / frame (0)
+Gui, Add, Text, x16 y530 w150 h50 , Which Gait aid do they use? (More often than not)
+Gui, Add, Radio, x356 y530 w90 h30 voCane goCane, Crutches / frame (0)
+Gui, Add, Radio, x176 y560 w130 h20 goCane, Single point stick (1)
+Gui, Add, Radio, x176 y530 w90 h20 goCane, None (2)
 
 Gui, Add, Text, x16 y590 w150 h50 , Do they use community supports? (Home help`, meals-on-wheels`, district nurse)
-Gui, Add, Radio, x176 y590 w130 h20 , None or 1 / week (1)
-Gui, Add, Radio, x176 y610 w130 h20 , 2 or more / week (0)
+Gui, Add, Radio, x176 y610 w130 h20 voComHelp goComHelp, 2 or more / week (0)
+Gui, Add, Radio, x176 y590 w130 h20 goComHelp, None or 1 / week (1)
 
 Gui, Add, Text, x16 y650 w150 h50 , Will you live with someone who can care for your after your operation?
-Gui, Add, Radio, x176 y650 w80 h20 , Yes (3)
-Gui, Add, Radio, x176 y675 w80 h20 , No (0)
+Gui, Add, Radio, x176 y650 w80 h20 voLiveWith goLiveWith , Yes (3)
+Gui, Add, Radio, x176 y675 w80 h20 goLiveWith, No (0)
 
 Gui, Add, Button, x326 y570 w120 h30 , Risk Score
 Gui, Add, Edit, x326 y610 w120 h20 , 
@@ -80,10 +80,11 @@ Gui, Add, Groupbox, x235 y640 w225 h65, Risk Interpretation
 Gui, Add, Text, x246 y655 w210 h45 , * < 6 Post acute care facility (SNF or Rehab)`n* 6-9 Home health PT/OT`n* >9 Home with outpatient PT/OT
 
 ; Generated using SmartGUI Creator for SciTE
-Gui, Show, w480 h727, Orthopedic Referral - Total Joint Replacement Pre-Op eval
+Gui, Show, w472 h715, Orthopedic Referral - Total Joint Replacement Pre-Op eval
 return
 
-; TODO  - not the actual scoring code and the report to clipboard
+; ********************
+; Ortho referral 'Check List'
 
 oPT:
 Gui, Submit, NOHIDE
@@ -152,6 +153,94 @@ if (oAspirin = 1) {
 	MsgBox, % oAspirinStr
 }
 return
+
+oCardiac:
+Gui, Submit, NOHIDE
+oCardiacStr := "The patient is not stable from a cardiac standpoint"
+if (oCardiac = 1) {
+	oCardiacStr := "The patient is stable from a cardiac standpoint"
+	}
+MsgBox, % oCardiacStr
+return 
+
+; ********************
+; Risk predition / DC planning 
+
+oAge:
+Gui, Submit, NOHIDE
+oAge := oAge - 1
+if (oAge = 0) {
+	oAgeStr := "The patient's age group is >75 years"
+} else if (oAge = 1) {
+	oAgeStr := "The patient's age group is 66-75 years"
+} else {
+	oAgeStr := "The patient's age group is 50-65 years"
+}
+MsgBox, % oAgeStr
+return 
+
+oSex:
+Gui, Submit, NOHIDE
+if (oSex = 1) {
+	oSexStr := "Patient is Female"
+} else {
+	oSexStr := "Patient is Male"
+}
+MsgBox, % oSexStr
+return 
+
+oWalk:
+Gui, Submit, NOHIDE
+oWalk := oWalk - 1
+if (oWalk = 0) {
+	oWalkStr := "The patient is Housebound"
+} else if (oWalk = 1) {
+	oWalkStr := "The patient is able to walk 1-2 blocks(shopping center)"
+} else {
+	oWalkStr := "The patient is able to walk 2 or more blocks"
+}
+MsgBox, % oWalkStr "`n" oWalk
+return 
+
+oCane:
+Gui, Submit, NOHIDE
+oCane := oCane - 1
+if (oCane = 0) {
+	oCaneStr := "The patient uses crutches or a frame"
+} else if (oCane = 1) {
+	oCaneStr := "The patient uses a basic cane"
+} else {
+	oCaneStr := "The patient dose not require a walking aid"
+}
+MsgBox, % oCaneStr "`n" oCane
+return 
+
+oComHelp: 
+Gui, Submit, NOHIDE
+oComHelp := oComHelp -1
+if (oComHelp = 1){
+	oComHelpStr := "They requir community help on once a week or not at all"
+} else {
+	oComHelpStr := "They require community help 2 or more times a week"
+}
+MsgBox, % oComHelpStr "`n" oComHelp
+return 
+
+oLiveWith:
+Gui, Submit, NOHIDE
+if (oLiveWith = 1) {
+	oLiveWith := 3
+	oLiveWithStr := "The patient will live with somebody to assist in their care after the surgery"
+} else {
+	oLiveWith := 0
+	oLiveWithStr := "The patient will not have help at home to assist in their care after surgery"
+}
+MsgBox, % oLiveWithStr "`n"oLiveWith
+return 
+
+; ********************
+; Score and report 
+
 
 
 GuiClose:
