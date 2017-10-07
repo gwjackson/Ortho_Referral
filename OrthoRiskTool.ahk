@@ -30,14 +30,14 @@ Gui, Add, Text, x16 y182 w340 h100 , Is the patient on anticoagulation for a med
 Gui, Add, Radio, x366 y175 w40 h30 voAnticoag goAnticoag, Y
 Gui, Add, Radio, x416 y175 w40 h30 goAnticoag, N
 Gui, Add, Text, x30 y210, a. Warfarin or Coumadin with plan for bridging
-Gui, Add, Radio, x366 y200 w40 h30 , Y
-Gui, Add, Radio, x416 y200 w40 h30 , N
+Gui, Add, Radio, x366 y200 w40 h30 voWarfarin goWarfarin, Y
+Gui, Add, Radio, x416 y200 w40 h30 goWarfarin, N
 Gui, Add, Text, x30 y235, b.  Xeralto / Eliquis 
-Gui, Add, Radio, x366 y225 w40 h30 , Y
-Gui, Add, Radio, x416 y225 w40 h30 , N
+Gui, Add, Radio, x366 y225 w40 h30 voXeralto goXeralto, Y
+Gui, Add, Radio, x416 y225 w40 h30 goXeralto, N
 Gui, Add, Text, x20 y260, c.  Aspirin / Plavix 
-Gui, Add, Radio, x366 y250 w40 h30 , Y
-Gui, Add, Radio, x416 y250 w40 h30 , N
+Gui, Add, Radio, x366 y250 w40 h30 voAsa goASA, Y
+Gui, Add, Radio, x416 y250 w40 h30 goASA, N
 
 Gui, Add, Text, x16 y292 w340 h30 , Is the patient stable for surgery from a cardiac standpoint?
 Gui, Add, Radio, x366 y285 w40 h30 , Y
@@ -115,10 +115,47 @@ return
 
 oAnticoag:
 Gui, Submit, NOHIDE
-oAnticoag := (oAnticoag = 2) ? "The patient is not on anticoagulationg therapy" : 1
-oAnticoagStr := oAnticoag
-MsgBox, % oAnticoagStr
+if (oAnticoag = 2){
+oAnticoagStr := (oAnticoag = 2) ? "The patient is not on anticoagulationg therapy" : 2
+MsgBox, % oAnticoagStr	
+}
 return
+
+oWarfarin:
+Gui, Submit, NOHIDE
+If (oAnticoag = 2) {
+	return
+}
+if (oWarfarin = 1) {
+	oAnticoagStr := "The patient is taking Warfarin / Coumadin for anticoagulation"
+}
+MsgBox, % oAnticoagStr
+Return 
+
+oXeralto:
+Gui, Submit, NOHIDE
+If (oAnticoag = 2) {
+	return
+}
+if (oXeralto = 1) {
+	oAnticoagStr := "The patient is taking either Xeralto or Eliquis for anticoagulation"
+}
+MsgBox, % oAnticoagStr
+Return 
+
+oASA:
+Gui, Submit, NOHIDE
+If (oAnticoag = 2) {
+	return
+}
+if (oASA = 1) {
+	oAnticoagStr := "The patient is taking Aspirin and/or Plavix for anticoagulation"
+}
+MsgBox, % oAnticoagStr
+Return 
+
+
+
 
 
 
