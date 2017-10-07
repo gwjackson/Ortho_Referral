@@ -9,7 +9,8 @@ oASA := 0, oCardiac :=0
 
 reportString := ""
 
-Gui, Add, GroupBox, x6 y5 w460 h319 , Check List
+Gui, Add, GroupBox, x6 y5 w460 h319 , Risk Check List
+
 Gui, Add, Text, x16 y25 w340 h30 , Has the patient failed conservative meaures?  (These include NSAID's / analgesics`, steroid joint injections`, PT`, weight loss`, exercise program)
 Gui, Add, Radio, x366 y15 w40 h30 voPT goPT , Y
 Gui, Add, Radio, x416 y15 w40 h30 goPT , N
@@ -40,20 +41,21 @@ Gui, Add, Radio, x366 y250 w40 h30 voAsa goASA, Y
 Gui, Add, Radio, x416 y250 w40 h30 goASA, N
 
 Gui, Add, Text, x16 y292 w340 h30 , Is the patient stable for surgery from a cardiac standpoint?
-Gui, Add, Radio, x366 y285 w40 h30 , Y
-Gui, Add, Radio, x416 y285 w40 h30 , N
+Gui, Add, Radio, x366 y285 w40 h30 voCardiac goCardiac, Y
+Gui, Add, Radio, x416 y285 w40 h30 goCardiac, N
 
 ; *****
 
-Gui, Add, GroupBox, x6 y330 w460 h395 , Risk Assessment and Prediction Tool`; Discharge Planning
+Gui, Add, GroupBox, x6 y330 w460 h395 , Discharge Planning
+
 Gui, Add, Text, x16 y355 w150 h50 , What is their age group?
-Gui, Add, Radio, x176 y355 w90 h20 , 50-65 years (2)
-Gui, Add, Radio, x176 y380 w90 h20 , 66-75 years (1)
-Gui, Add, Radio, x276 y355 w90 h20 , > 75 years (0)
+Gui, Add, Radio, x276 y355 w90 h20  voAge goAge, > 75 years (0)
+Gui, Add, Radio, x176 y380 w90 h20 goAge, 66-75 years (1)
+Gui, Add, Radio, x176 y355 w90 h20 goAge, 50-65 years (2)
 
 Gui, Add, Text, x16 y410 w150 h50 , Gender?
-Gui, Add, Radio, x176 y410 w90 h20 , Male (2)
-Gui, Add, Radio, x176 y435 w90 h20 , Female (1)
+Gui, Add, Radio, x176 y435 w90 h20 voGender goGender, Female (1)
+Gui, Add, Radio, x176 y410 w90 h20 goGender, Male (2)
 
 Gui, Add, Text, x16 y470 w150 h50 , How far`, on avg.`, can they walk? (a blook is ~ 200m)
 Gui, Add, Radio, x176 y470 w170 h20 , 2 blocks or moer (2)
@@ -77,7 +79,7 @@ Gui, Add, Button, x326 y570 w120 h30 , Risk Score
 Gui, Add, Edit, x326 y610 w120 h20 , 
 
 Gui, Add, Groupbox, x235 y640 w225 h65, Risk Interpretation
-Gui, Add, Text, x246 y655 w210 h45 , * < 6 Post acute care facility (SNF or Rehab)`n* 6-9 Home health PT/OT`n* >9 Home with outpatient PT/OT
+Gui, Add, Text, x246 y655 w210 h55 , ** < 6 Post acute care facility (SNF or Rehab)`n** 6-9 Home health PT/OT`n** >9 Home with outpatient PT/OT
 
 ; Generated using SmartGUI Creator for SciTE
 Gui, Show, w480 h727, Orthopedic Referral - Total Joint Replacement Pre-Op eval
@@ -128,8 +130,8 @@ If (oAnticoag = 2) {
 }
 if (oWarfarin = 1) {
 	oAnticoagStr := "The patient is taking Warfarin / Coumadin for anticoagulation"
+	MsgBox, % oAnticoagStr
 }
-MsgBox, % oAnticoagStr
 Return 
 
 oXeralto:
@@ -139,8 +141,8 @@ If (oAnticoag = 2) {
 }
 if (oXeralto = 1) {
 	oAnticoagStr := "The patient is taking either Xeralto or Eliquis for anticoagulation"
+	MsgBox, % oAnticoagStr
 }
-MsgBox, % oAnticoagStr
 Return 
 
 oASA:
@@ -150,12 +152,38 @@ If (oAnticoag = 2) {
 }
 if (oASA = 1) {
 	oAnticoagStr := "The patient is taking Aspirin and/or Plavix for anticoagulation"
-}
 MsgBox, % oAnticoagStr
+}
 Return 
 
+oCardiac:
+Gui, Submit, NOHIDE
+oCardiacStr := (oCardiac = 1) ? "The patient is stable from a cardiac standpoint" : "The patient is not stable from a cardiac standpoint"
+MsgBox, % oCardiacStr
+return 
 
+; Discharge Planning 
 
+oAge:
+Gui, Submit, NOHIDE
+oAge := oAge -1
+if (oAge = 0) {
+	oAgeStr := "The patient's age group is > 75 years"
+	}
+if (oAge = 2) {
+	oAgeStr := "The patient's age group is 50-65 years"
+	}
+if (oAge = 1) {
+	oAgeStr := "The patient's age group is 66-75 years"
+	}
+MsgBox, % oAgeStr
+return
+
+oGender:
+Gui, Submit, NOHIDE
+oGenderStr := (oGender = 1) ? "The patient is Female" : "The patient is Male"
+MsgBox, % oGenderStr
+return 
 
 
 
