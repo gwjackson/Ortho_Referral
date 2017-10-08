@@ -7,7 +7,7 @@
 oPT := 0, oBMI := 0, oA1c := 0, oSmoke := 0, oAnticoag := 0, oWarfarin := 0, oXeralto := 0
 oASA := 0, oCardiac :=0, oAnticoag := 0
 
-reportString := ""
+rptString := ""
 
 Gui, Add, GroupBox, x6 y5 w460 h319 , Risk Check List
 
@@ -31,7 +31,6 @@ Gui, Add, Text, x16 y182 w340 h100 , Is the patient on anticoagulation for a med
 Gui, Add, Radio, x366 y175 w40 h30 voAnticoag goAnticoag, Y
 Gui, Add, Radio, x416 y175 w40 h30 goAnticoag Checked, N
 Gui, Add, Text, x30 y210, a. Warfarin or Coumadin with plan for bridging
-<<<<<<< HEAD
 Gui, Add, Radio, x366 y200 w40 h30 voWarfarin goWarfarin, Y
 Gui, Add, Radio, x416 y200 w40 h30 goWarfarin, N
 Gui, Add, Text, x30 y235, b.  Xeralto / Eliquis 
@@ -43,7 +42,7 @@ Gui, Add, Radio, x416 y250 w40 h30 goASA, N
 
 ; ********************
 
-Gui, Add, GroupBox, x6 y330 w460 h380 , Risk Assessment and Prediction Tool`; Discharge Planning
+Gui, Add, GroupBox, x6 y332 w460 h380 , Risk Assessment and Prediction Tool`; Discharge Planning
 Gui, Add, Text, x16 y355 w150 h50 , What is their age group?
 Gui, Add, Radio, x276 y355 w90 h20 voAge goAge , > 75 years (0)
 Gui, Add, Radio, x176 y380 w90 h20 goAge , 66-75 years (1)
@@ -72,14 +71,14 @@ Gui, Add, Text, x16 y650 w150 h50 , Will you live with someone who can care for 
 Gui, Add, Radio, x176 y650 w80 h20 voLiveWith goLiveWith , Yes (3)
 Gui, Add, Radio, x176 y675 w80 h20 goLiveWith, No (0)
 
-Gui, Add, Button, x326 y570 w120 h30 , Risk Score
+Gui, Add, Button, x326 y570 w120 h30 goriskScore, Risk Score
 Gui, Add, Edit, x326 y610 w120 h20 , 
 
-Gui, Add, Groupbox, x235 y640 w225 h65, Risk Interpretation
+Gui, Add, Groupbox, x235 y642 w225 h65, Risk Interpretation
 Gui, Add, Text, x246 y655 w210 h55 , ** < 6 Post acute care facility (SNF or Rehab)`n** 6-9 Home health PT/OT`n** >9 Home with outpatient PT/OT
 
 ; Generated using SmartGUI Creator for SciTE
-Gui, Show, w472 h715, Orthopedic Referral - Total Joint Replacement Pre-Op eval
+Gui, Show, w472 h717, Orthopedic Referral - Total Joint Replacement Pre-Op eval
 return
 
 ; ********************
@@ -160,9 +159,6 @@ oCardiacStr := (oCardiac = 1) ? "The patient is stable from a cardiac standpoint
 MsgBox, % oCardiacStr
 return 
 
-; Discharge Planning 
-
-
 ; ********************
 ; Risk predition / DC planning 
 
@@ -241,6 +237,10 @@ return
 ; ********************
 ; Score and report 
 
+oriskScore:
+rptString := YNoPtStr . "`n" . oBMIStr . "`n" . oA1cStr . "`n" . oSmokeStr . "`n" . oAnticaogStr . "`n" . oCardiacStr .  "`n" . oAgeStr . "`n" . oSexStr . "`n" . oWalkStr . "`n" . oCaneStr . "`n" . oComHelpStr . "`n" . oLiveWithStr . "`n"
+MsgBox, % rptString
+return 
 
 GuiClose:
 ExitApp
