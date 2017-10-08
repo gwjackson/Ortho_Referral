@@ -40,35 +40,9 @@ Gui, Add, Radio, x416 y225 w40 h30 goXeralto, N
 Gui, Add, Text, x20 y260, c.  Aspirin / Plavix 
 Gui, Add, Radio, x366 y250 w40 h30 voAsa goASA, Y
 Gui, Add, Radio, x416 y250 w40 h30 goASA, N
-=======
-Gui, Add, Radio, x366 y200 w40 h30 voCoumadin goCoumadin, Y
-Gui, Add, Radio, x416 y200 w40 h30 goCoumadin, N
-Gui, Add, Text, x30 y235, b.  Xeralto / Eliquis 
-Gui, Add, Radio, x366 y225 w40 h30 voXeralto goXeralto , Y
-Gui, Add, Radio, x416 y225 w40 h30 goXeralto, N
-Gui, Add, Text, x30 y260, c.  Aspirin / Plavix 
-Gui, Add, Radio, x366 y250 w40 h30 voAspirin goAspirin , Y
-Gui, Add, Radio, x416 y250 w40 h30 goAspirin, N
->>>>>>> 24f869c040c591cb405c0c618e4e562ed425df56
-
-Gui, Add, Text, x16 y292 w340 h30 , Is the patient stable for surgery from a cardiac standpoint?
-Gui, Add, Radio, x366 y285 w40 h30 voCardiac goCardiac, Y
-Gui, Add, Radio, x416 y285 w40 h30 goCardiac, N
 
 ; ********************
 
-<<<<<<< HEAD
-Gui, Add, GroupBox, x6 y330 w460 h395 , Discharge Planning
-
-Gui, Add, Text, x16 y355 w150 h50 , What is their age group?
-Gui, Add, Radio, x276 y355 w90 h20  voAge goAge, > 75 years (0)
-Gui, Add, Radio, x176 y380 w90 h20 goAge, 66-75 years (1)
-Gui, Add, Radio, x176 y355 w90 h20 goAge, 50-65 years (2)
-
-Gui, Add, Text, x16 y410 w150 h50 , Gender?
-Gui, Add, Radio, x176 y435 w90 h20 voGender goGender, Female (1)
-Gui, Add, Radio, x176 y410 w90 h20 goGender, Male (2)
-=======
 Gui, Add, GroupBox, x6 y330 w460 h380 , Risk Assessment and Prediction Tool`; Discharge Planning
 Gui, Add, Text, x16 y355 w150 h50 , What is their age group?
 Gui, Add, Radio, x276 y355 w90 h20 voAge goAge , > 75 years (0)
@@ -78,7 +52,7 @@ Gui, Add, Radio, x176 y355 w90 h20 goAge , 50-65 years (2)
 Gui, Add, Text, x16 y410 w150 h50 , Gender?
 Gui, Add, Radio, x176 y435 w90 h20 voSex goSex , Female (1)
 Gui, Add, Radio, x176 y410 w90 h20 goSex, Male (2)
->>>>>>> 24f869c040c591cb405c0c618e4e562ed425df56
+
 
 Gui, Add, Text, x16 y470 w150 h50 , How far`, on avg.`, can they walk? (a block is ~ 200m)
 Gui, Add, Radio, x356 y470 w100 h50 voWalk goWalk , Housebound (most of the time) (0)
@@ -188,70 +162,6 @@ return
 
 ; Discharge Planning 
 
-oAge:
-Gui, Submit, NOHIDE
-oAge := oAge -1
-if (oAge = 0) {
-	oAgeStr := "The patient's age group is > 75 years"
-	}
-if (oAge = 2) {
-	oAgeStr := "The patient's age group is 50-65 years"
-	}
-if (oAge = 1) {
-	oAgeStr := "The patient's age group is 66-75 years"
-	}
-MsgBox, % oAgeStr
-return
-
-<<<<<<< HEAD
-oGender:
-Gui, Submit, NOHIDE
-oGenderStr := (oGender = 1) ? "The patient is Female" : "The patient is Male"
-MsgBox, % oGenderStr
-return 
-
-=======
-oCoumadin:
-Gui, Submit, NOHIDE
-if (oAnticoag = 2) {
-	return
-}
-if (oCoumadin = 1) {
-	oCoumadinStr := "The patient is on anticoag. treatment with Coumadin / Warfarin"
-	MsgBox, % oCoumadinStr
-}
-return 
-
-oXeralto:
-Gui, Submit, NOHIDE
-if (oAnticoag = 2) {
-	return
-}
-if (oXeralto = 1) {
-	oXeraltoStr := "The patient is on anticoag. treatment with Xeralto / Eliquis"
-	MsgBox, % oXeraltoStr
-}
-return
-
-oAspirin:
-Gui, Submit, NOHIDE
-if (oAnticoag = 2) {
-	return
-}
-if (oAspirin = 1) {
-	oAspirinStr := "The patient is on anticoag. treatment with Aspirin / Plavix"
-	MsgBox, % oAspirinStr
-}
-return
-
-oCardiac:
-Gui, Submit, NOHIDE
-oCardiacStr := "The patient is not stable from a cardiac standpoint"
-if (oCardiac = 1) {
-	oCardiacStr := "The patient is stable from a cardiac standpoint"
-	}
-MsgBox, % oCardiacStr
-return 
 
 ; ********************
 ; Risk predition / DC planning 
@@ -325,13 +235,11 @@ if (oLiveWith = 1) {
 	oLiveWith := 0
 	oLiveWithStr := "The patient will not have help at home to assist in their care after surgery"
 }
-MsgBox, % oLiveWithStr "`n"oLiveWith
-return 
+MsgBox, % oLiveWithStr "`n" oLiveWith
+return
 
 ; ********************
 ; Score and report 
-
->>>>>>> 24f869c040c591cb405c0c618e4e562ed425df56
 
 
 GuiClose:
