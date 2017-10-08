@@ -87,28 +87,28 @@ return
 oPT:
 Gui, Submit, NOHIDE
 YNoPT := (oPT = 1) ?  "has" :  "has not"
-YNoPTStr := "The patient " . YNoPT . " failed conservative measures.`n`r"
+YNoPTStr := "The patient " . YNoPT . " failed conservative measures."
 MsgBox , % YNoPTStr
 return 
 
 oBMI:
 Gui, Submit, NOHIDE
 YNoBMI := oBMI = 1 ? "is" : "is not"
-YNoBMIStr := "The patient's BMI " . YNoBMI . " >= 40 or >=35 with comorbidities.`n`r" 
+YNoBMIStr := "The patient's BMI " . YNoBMI . " >= 40 or >=35 with comorbidities." 
 MsgBox, % YNoBMIStr
 return 
 
 oA1c:
 Gui, Submit, NOHIDE
 oA1c := (oA1c = 1) ? "is" : "is not"
-oA1cStr := "The patient's A1c " . oA1c . " >= to 7.5`%`n`r"
+oA1cStr := "The patient's A1c " . oA1c . " >= to 7.5`%"
 MsgBox, % oA1cStr
 return 
 
 oSmoke:
 Gui, Submit, NOHIDE
 oSmoke := (oSmoke = 1) ? "have" : "have not" 
-oSmokeStr := "If the patient was a smoker they " . oSmoke . " quite`; or they also " . oSmoke . " quite smoking in the past 6 weeks.`n`r"  
+oSmokeStr := "If the patient was a smoker they " . oSmoke . " quite`; or they also " . oSmoke . " quite smoking in the past 6 weeks."  
 MsgBox, % oSmokeStr
 return
 
