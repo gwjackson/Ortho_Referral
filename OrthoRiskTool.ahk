@@ -40,6 +40,9 @@ Gui, Add, Text, x20 y260, c.  Aspirin / Plavix
 Gui, Add, Radio, x366 y250 w40 h30 voAsa goASA, Y
 Gui, Add, Radio, x416 y250 w40 h30 goASA, N
 
+; lost cardiac question?? functions still here ?? 
+; add back 
+
 ; ********************
 
 Gui, Add, GroupBox, x6 y332 w460 h380 , Risk Assessment and Prediction Tool`; Discharge Planning
@@ -223,7 +226,7 @@ MsgBox, % oComHelpStr "`n" oComHelp
 return 
 
 oLiveWith:
-Gui, Submit, NOHIDE
+Gui, Submit, NOHIDEgit
 if (oLiveWith = 1) {
 	oLiveWith := 3
 	oLiveWithStr := "The patient will live with somebody to assist in their care after the surgery"
