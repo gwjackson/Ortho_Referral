@@ -86,16 +86,16 @@ return
 
 oPT:
 Gui, Submit, NOHIDE
-YNoPT := (oPT = 1) ?  "has" :  "has not"
-YNoPTStr := "The patient " . YNoPT . " failed conservative measures."
-MsgBox , % YNoPTStr
+oPT := (oPT = 1) ?  "has" :  "has not"
+oPTStr := "The patient " . YNoPT . " failed conservative measures."
+MsgBox , % oPTStr
 return 
 
 oBMI:
 Gui, Submit, NOHIDE
-YNoBMI := oBMI = 1 ? "is" : "is not"
-YNoBMIStr := "The patient's BMI " . YNoBMI . " >= 40 or >=35 with comorbidities." 
-MsgBox, % YNoBMIStr
+oBMI := oBMI = 1 ? "is" : "is not"
+oBMIStr := "The patient's BMI " . YNoBMI . " >= 40 or >=35 with comorbidities." 
+MsgBox, % oBMIStr
 return 
 
 oA1c:
@@ -238,7 +238,7 @@ return
 ; Score and report 
 
 oriskScore:
-rptString := YNoPtStr . "`n" . oBMIStr . "`n" . oA1cStr . "`n" . oSmokeStr . "`n" . oAnticaogStr . "`n" . oCardiacStr .  "`n" . oAgeStr . "`n" . oSexStr . "`n" . oWalkStr . "`n" . oCaneStr . "`n" . oComHelpStr . "`n" . oLiveWithStr . "`n"
+rptString := oPtStr . "`n" . oBMIStr . "`n" . oA1cStr . "`n" . oSmokeStr . "`n" . oAnticaogStr . "`n" . oCardiacStr .  "`n" . oAgeStr . "`n" . oSexStr . "`n" . oWalkStr . "`n" . oCaneStr . "`n" . oComHelpStr . "`n" . oLiveWithStr . "`n"
 MsgBox, % rptString
 return 
 
