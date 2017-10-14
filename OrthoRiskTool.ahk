@@ -43,6 +43,10 @@ Gui, Add, Radio, x416 y250 w40 h30 goASA, N
 ; lost cardiac question?? functions still here ?? 
 ; add back 
 
+Gui, Add, Text, X16 y300 w340 h30, Is the patient stable for surgery from a cardiac Standpoint? 
+Gui, Add, Radio, x366 y290 w40 h30 voCardiac goCardiac, Y
+Gui, Add, Radio, x416 y290 w40 h30 goCardiac, N 
+
 ; ********************
 
 Gui, Add, GroupBox, x6 y332 w460 h380 , Risk Assessment and Prediction Tool`; Discharge Planning
