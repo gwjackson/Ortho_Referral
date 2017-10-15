@@ -93,28 +93,24 @@ oPT:
 Gui, Submit, NOHIDE
 oPT := (oPT = 1) ?  "has" :  "has not"
 oPTStr := "-The patient " . YNoPT . " failed conservative measures."
-;MsgBox , % oPTStr
 return 
 
 oBMI:
 Gui, Submit, NOHIDE
 oBMI := oBMI = 1 ? "is" : "is not"
 oBMIStr := "-The patient's BMI " . YNoBMI . " >= 40 or >=35 with comorbidities." 
-;MsgBox, % oBMIStr
 return 
 
 oA1c:
 Gui, Submit, NOHIDE
 oA1c := (oA1c = 1) ? "is" : "is not"
 oA1cStr := "-The patient's A1c " . oA1c . " >= to 7.5`%"
-;MsgBox, % oA1cStr
 return 
 
 oSmoke:
 Gui, Submit, NOHIDE
 oSmoke := (oSmoke = 1) ? "have" : "have not" 
 oSmokeStr := "-If the patient was a smoker they " . oSmoke . " quite`; or they also " . oSmoke . " quite smoking in the past 6 weeks."  
-;MsgBox, % oSmokeStr
 return
 
 oAnticoag:
@@ -139,7 +135,6 @@ If (oAnticoag = 2) {
 }
 if (oWarfarin = 1) {
 	oAnticoagStr := "-The patient is taking Warfarin / Coumadin for anticoagulation"
-;	MsgBox, % oAnticoagStr
 }
 Return 
 
@@ -150,7 +145,6 @@ If (oAnticoag = 2) {
 }
 if (oXeralto = 1) {
 	oAnticoagStr := "-The patient is taking either Xeralto or Eliquis for anticoagulation"
-;	MsgBox, % oAnticoagStr
 }
 Return 
 
@@ -161,14 +155,12 @@ If (oAnticoag = 2) {
 }
 if (oASA = 1) {
 	oAnticoagStr := "-The patient is taking Aspirin and/or Plavix for anticoagulation"
-;MsgBox, % oAnticoagStr
 }
 Return 
 
 oCardiac:
 Gui, Submit, NOHIDE
 oCardiacStr := (oCardiac = 1) ? "-The patient is stable from a cardiac standpoint" : "-The patient is not stable from a cardiac standpoint"
-;MsgBox, % oCardiacStr
 return 
 
 ; ********************
@@ -184,7 +176,6 @@ if (oAge = 0) {
 } else {
 	oAgeStr := "-The patient's age group is 50-65 years"
 }
-;MsgBox, % oAgeStr
 return 
 
 oSex:
@@ -194,7 +185,6 @@ if (oSex = 1) {
 } else {
 	oSexStr := "-Patient is Male"
 }
-;MsgBox, % oSexStr
 return 
 
 oWalk:
@@ -207,7 +197,6 @@ if (oWalk = 0) {
 } else {
 	oWalkStr := "-The patient is able to walk 2 or more blocks"
 }
-;MsgBox, % oWalkStr "`n" oWalk
 return 
 
 oCane:
@@ -220,7 +209,6 @@ if (oCane = 0) {
 } else {
 	oCaneStr := "-The patient dose not require a walking aid"
 }
-;MsgBox, % oCaneStr "`n" oCane
 return 
 
 oComHelp: 
@@ -231,7 +219,6 @@ if (oComHelp = 1){
 } else {
 	oComHelpStr := "-They require community help 2 or more times a week"
 }
-;MsgBox, % oComHelpStr "`n" oComHelp
 return 
 
 oLiveWith:
@@ -243,7 +230,6 @@ if (oLiveWith = 1) {
 	oLiveWith := 0
 	oLiveWithStr := "-The patient will not have help at home to assist in their care after surgery"
 }
-;MsgBox, % oLiveWithStr "`n" oLiveWith
 return
 
 ; ********************
@@ -254,7 +240,6 @@ oriskScore:
 oRptString := oPtStr . "`r`n" . oBMIStr . `"`r`n" . oA1cStr . "`r`n" . oSmokeStr . "`r`n" . oAnticoagStr . "`r`n" . oCardiacStr .  "`r`n" . oAgeStr . "`r`n" . oSexStr . "`r`n" . oWalkStr . "`r`n" . oCaneStr . "`r`n" . oComHelpStr . "`r`n" . oLiveWithStr . "`r`n"
 ; add up the risk score 
 oRiskSum := oAge + oSex + oWalk + oCane + oComHelp + oLiveWith
-MsgBox, % "Risk Score " . oRiskSum
 if (oRiskSum  < 6) {
 	oDCstr := "Post acute care facility (SNF or Rehab) post discharge"
 } else if (oRptSum  >= 6) & (oPrtSum <= 9) {
