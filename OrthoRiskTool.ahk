@@ -30,7 +30,7 @@ Gui, Add, Radio, x416 y135 w40 h30 goSmoke, N
 
 Gui, Add, Text, x16 y182 w340 h100 , Is the patient on anticoagulation for a medical indication?
 Gui, Add, Radio, x366 y175 w40 h30  voAnticoag goAnticoag, Y
-Gui, Add, Radio, x416 y175 w40 h30 goAnticoag Checked, N
+Gui, Add, Radio, x416 y175 w40 h30 goAnticoag, N
 Gui, Add, Text, x30 y210, a. Warfarin or Coumadin with plan for bridging
 Gui, Add, Text, x30 y235, b.  Xeralto / Eliquis
 Gui, Add, Text, x20 y260, c.  Aspirin / Plavix
@@ -120,9 +120,16 @@ return
 oAnticoag:
 Gui, Submit, NOHIDE
 if (oAnticoag = 2){
-oAnticoagStr := (oAnticoag = 2) ? "The patient is not on anticoagulationg therapy" : 2
-;MsgBox, % oAnticoagStr	
-}
+	oAnticoagStr := (oAnticoag = 2) ? "The patient is not on anticoagulationg therapy" : 2
+	;MsgBox, % oAnticoagStr	
+	Control, Disable, , Button12, Orthopedic
+	Control, Disable, , Button13, Orthopedic
+	Control, Disable, , Button14, Orthopedic
+	} else {
+	Control, Enable, , Button12, Orthopedic
+	Control, Enable, , Button13, Orthopedic
+	Control, Enable, , Button14, Orthopedic 
+	}
 return
 
 oWarfarin:
@@ -243,7 +250,7 @@ return
 ; Score and report 
 
 oriskScore:
-rptString := oPtStr . "`n" . oBMIStr . "`n" . oA1cStr . "`n" . oSmokeStr . "`n" . oAnticaogStr . "`n" . oCardiacStr .  "`n" . oAgeStr . "`n" . oSexStr . "`n" . oWalkStr . "`n" . oCaneStr . "`n" . oComHelpStr . "`n" . oLiveWithStr . "`n"
+rptString := oPtStr . "`n" . oBMIStr . "`n" . oA1cStr . "`n" . oSmokeStr . "`n" . oAnticoagStr . "`n" . oCardiacStr .  "`n" . oAgeStr . "`n" . oSexStr . "`n" . oWalkStr . "`n" . oCaneStr . "`n" . oComHelpStr . "`n" . oLiveWithStr . "`n"
 MsgBox, % rptString
 return 
 
