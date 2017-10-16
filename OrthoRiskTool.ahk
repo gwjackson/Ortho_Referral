@@ -236,7 +236,7 @@ return
 
 oriskScore:
 ; build the report string `r`n
-oRptString := oPtStr . "`r`n" . oBMIStr . `"`r`n" . oA1cStr . "`r`n" . oSmokeStr . "`r`n" . oAnticoagStr . "`r`n" . oCardiacStr .  "`r`n" . oAgeStr . "`r`n" . oSexStr . "`r`n" . oWalkStr . "`r`n" . oCaneStr . "`r`n" . oComHelpStr . "`r`n" . oLiveWithStr . "`r`n"
+oRptString := "Orthopedic surgical referral check list and Discharge planning:`r`n`r`n" . oPtStr . "`r`n" . oBMIStr . `"`r`n" . oA1cStr . "`r`n" . oSmokeStr . "`r`n" . oAnticoagStr . "`r`n" . oCardiacStr .  "`r`n" . oAgeStr . "`r`n" . oSexStr . "`r`n" . oWalkStr . "`r`n" . oCaneStr . "`r`n" . oComHelpStr . "`r`n" . oLiveWithStr . "`r`n"
 ; add up the risk score 
 oRiskSum := oAge + oSex + oWalk + oCane + oComHelp + oLiveWith
 if (oRiskSum  < 6) {
