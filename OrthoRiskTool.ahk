@@ -253,3 +253,4 @@ return
 
 GuiClose:
 ExitApp
+return 
