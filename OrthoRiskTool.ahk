@@ -76,11 +76,10 @@ Gui, Add, Text, x16 y650 w150 h50 , Will you live with someone who can care for 
 Gui, Add, Radio, x176 y650 w80 h20 voLiveWith goLiveWith , Yes (3)
 Gui, Add, Radio, x176 y675 w80 h20 goLiveWith, No (0)
 
-Gui, Add, Button, x326 y570 w120 h30 goriskScore, Risk Score
-Gui, Add, Edit, x326 y610 w120 h20 , 
+Gui, Add, Button, x326 y580 w120 h30 goriskScore, Risk Score
 
-Gui, Add, Groupbox, x235 y642 w225 h65, Risk Interpretation
-Gui, Add, Text, x246 y655 w210 h55 , ** < 6 Post acute care facility (SNF or Rehab)`n** 6-9 Home health PT/OT`n** >9 Home with outpatient PT/OT
+Gui, Add, Groupbox, x235 y632 w225 h75, Risk Interpretation
+Gui, Add, Text, x246 y645 w210 h55 , ** < 6 Post acute care facility (SNF or Rehab)`n** 6-9 Home health PT/OT`n** >9 Home with outpatient PT/OT
 
 ; Generated using SmartGUI Creator for SciTE
 Gui, Show, w472 h717, Orthopedic Referral - Total Joint Replacement Pre-Op eval
