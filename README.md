@@ -1,5 +1,5 @@
 # Ortho_Referral
-AHK/FK dialog to review appropriateness of referral and DC planning risks
+AHK/FK dialog and PDF doc to review appropriateness of referral and DC planning risks
 
 Tool to help evaluate patient risks when being referred for total joint surgery
 
