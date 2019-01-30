@@ -9,7 +9,11 @@ See User JavaScript Changes for 10.1.1 (Acrobat | Reader) for the changes starti
 
 •New user JS location: The user JavaScript folder is moved from 
 •Vista and Windows 7:Users\(username)\AppData\Roaming\Adobe\Acrobat\10.0\JavaScripts to Users\(username)\AppData\Roaming\Adobe\Acrobat\Privileged\10.0\JavaScripts. For example, the new path might be C:\Users\JoeUser\AppData\Roaming\Adobe\Acrobat\Privileged\10.0\JavaScripts
-•XP: Documents and Settings\(username)\Application Data\Adobe\Acrobat\10.0\JavaScripts to Documents and Settings\(username)\Application Data\Adobe\Acrobat\Privileged\10.0\JavaScripts. For example, the new path might be: C:\Documents and Settings\JoeUser\Application Data\Adobe\Acrobat\Privileged\10.0\JavaScripts
+
+•XP: Documents and Settings\(username)\Application Data\Adobe\Acrobat\10.0\JavaScripts 
+to Documents and Settings\(username)\Application Data\Adobe\Acrobat\Privileged\10.0\JavaScripts. 
+
+For example, the new path might be: C:\Documents and Settings\JoeUser\Application Data\Adobe\Acrobat\Privileged\10.0\JavaScripts
 
 You will need to adjust the locations for version 11:
 
@@ -21,6 +25,56 @@ You will need to adjust the locations for version 11:
 
 
 George Kaiser   
+
+===============
+
+https://forums.adobe.com/thread/2357100
+
+  BurtonDev  Jul 13, 2017 9:26 AM  (in response to BurtonDev)  
+
+
+
+Here's more details on the issue and the correct answer for anyone who needs additional clarification.
+
+ 
+
+My first attempt at saving my script to a folder-level file did not work because Acrobat was open. These scripts are loaded when the application initializes, and are not authorized to be edited while Acrobat is running.
+
+ 
+
+I also tried to save it to the wrong file. I searched for a config.js file and found one here (don't use this file!):
+
+ 
+
+C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\WebResources\Resource0\static\js
+
+ 
+
+Looking through old documentation and info on the web, I thought I had to save it to a user folder. This worked for older versions of Acrobat but does not work for Acrobat DC.
+
+ 
+
+Upon try67's suggestion, I ran app.getPath("app","javascript"); and on my computer, which is running Windows 10, it returned:
+
+ 
+
+C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Javascripts
+
+ 
+
+This is the correct location. On Mac or older versions of Windows, the location may be different. Run the app.getPath function to find it.
+
+ 
+
+To make and edit my config.js file, I simply created the file in another location (desktop is convenient), and after saving, dragged it into the folder I referenced above. This action prompts the user to authenticate from an administrative account. Once authenticated, the file is copied and Acrobat can then be opened, and it will load with the scripts. If I need to make more edits, I can close Acrobat, drag the file back onto my desktop and edit it from there.
+
+ 
+
+Thanks try67 for the prompt, very helpful reply!
+
+
+===============
+
 
 
 app.getPath("app","javascript");
