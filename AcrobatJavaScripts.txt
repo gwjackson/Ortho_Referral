@@ -1,0 +1,57 @@
+Folder / Batch level scrips for Acrobat 
+
+
+
+That error means the user has not defined a path or created a folder for that path.
+
+See User JavaScript Changes for 10.1.1 (Acrobat | Reader) for the changes starting with Acrobat/Reader 10.1.1. 
+
+
+•New user JS location: The user JavaScript folder is moved from 
+•Vista and Windows 7:Users\(username)\AppData\Roaming\Adobe\Acrobat\10.0\JavaScripts to Users\(username)\AppData\Roaming\Adobe\Acrobat\Privileged\10.0\JavaScripts. For example, the new path might be C:\Users\JoeUser\AppData\Roaming\Adobe\Acrobat\Privileged\10.0\JavaScripts
+•XP: Documents and Settings\(username)\Application Data\Adobe\Acrobat\10.0\JavaScripts to Documents and Settings\(username)\Application Data\Adobe\Acrobat\Privileged\10.0\JavaScripts. For example, the new path might be: C:\Documents and Settings\JoeUser\Application Data\Adobe\Acrobat\Privileged\10.0\JavaScripts
+
+You will need to adjust the locations for version 11:
+
+
+
+•Vista and Windows 7: Users\(username)\AppData\Roaming\Adobe\Acrobat\Privileged\11.0\JavaScripts. For example, the new path might be C:\Users\JoeUser\AppData\Roaming\Adobe\Acrobat\Privileged\11.0\JavaScripts
+•XP: Documents and Settings to Documents Settings\(username)\Application Data\Adobe\Acrobat\Privileged\11.0\JavaScripts. For example, the new path might be: C:\Documents and Settings\JoeUser\Application Data\Adobe\Acrobat\Privileged\11.0\JavaScripts
+•New format and location for persistent global variables: Variable settings stored in glob.settings.js and glob.js now reside in a new directory at %ApplicationData%\Adobe\Acrobat\11.0\JSCache. The key value pairs read from the ASCab are used to initialize the persistent global variables. No settings are saved as JavaScript files in this directory.
+
+
+George Kaiser   
+
+
+app.getPath("app","javascript");
+/C/Program Files (x86)/Adobe/Acrobat 11.0/Acrobat/JavaScripts
+
+========== example ==========
+
+myTrustedBrowseForDoc = app.trustedFunction( function ( oArgs )
+{
+app.beginPriv();
+var myTrustedRetn = app.browseForDoc( oArgs );
+app.endPriv();
+return myTrustedRetn;
+});
+
+========== mailForm 
+folder ---
+myTrust_mailForm = app.trustedFunction( function( oArgs)
+{
+  app.beginPriv();
+  var myTrustedRetn = app.mailForm( oArgs);
+  app.endPriv();
+  return myTrustedRetn;
+}); 
+
+in PDF ---
+try {
+  var oRertn = myTrusted_mailForm({oArg1, oARg2 ...oArgn});
+  console.println(oRetn.toSource());
+} catch (e) {
+  console.println("User cancelled Save As dialog box");
+}
+
+ ==========
